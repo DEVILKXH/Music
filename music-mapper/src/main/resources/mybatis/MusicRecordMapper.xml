@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.music.mapper.MusicRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.music.entity.MusicRecord" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="music_name" property="musicName" jdbcType="VARCHAR" />
+    <result column="music_singer" property="musicSinger" jdbcType="VARCHAR" />
+    <result column="music_album" property="musicAlbum" jdbcType="VARCHAR" />
+    <result column="music_url_online" property="musicUrlOnline" jdbcType="VARCHAR" />
+    <result column="music_url_download" property="musicUrlDownload" jdbcType="VARCHAR" />
+    <result column="music_createtime" property="musicCreatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UUID, music_name, music_singer, music_album, music_url_online, music_url_download, 
+    music_createtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from music_record
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from music_record
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.music.entity.MusicRecord" >
+    insert into music_record (UUID, music_name, music_singer, 
+      music_album, music_url_online, music_url_download, 
+      music_createtime)
+    values (#{uuid,jdbcType=VARCHAR}, #{musicName,jdbcType=VARCHAR}, #{musicSinger,jdbcType=VARCHAR}, 
+      #{musicAlbum,jdbcType=VARCHAR}, #{musicUrlOnline,jdbcType=VARCHAR}, #{musicUrlDownload,jdbcType=VARCHAR}, 
+      #{musicCreatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.music.entity.MusicRecord" >
+    insert into music_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="musicName != null" >
+        music_name,
+      </if>
+      <if test="musicSinger != null" >
+        music_singer,
+      </if>
+      <if test="musicAlbum != null" >
+        music_album,
+      </if>
+      <if test="musicUrlOnline != null" >
+        music_url_online,
+      </if>
+      <if test="musicUrlDownload != null" >
+        music_url_download,
+      </if>
+      <if test="musicCreatetime != null" >
+        music_createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="musicName != null" >
+        #{musicName,jdbcType=VARCHAR},
+      </if>
+      <if test="musicSinger != null" >
+        #{musicSinger,jdbcType=VARCHAR},
+      </if>
+      <if test="musicAlbum != null" >
+        #{musicAlbum,jdbcType=VARCHAR},
+      </if>
+      <if test="musicUrlOnline != null" >
+        #{musicUrlOnline,jdbcType=VARCHAR},
+      </if>
+      <if test="musicUrlDownload != null" >
+        #{musicUrlDownload,jdbcType=VARCHAR},
+      </if>
+      <if test="musicCreatetime != null" >
+        #{musicCreatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.music.entity.MusicRecord" >
+    update music_record
+    <set >
+      <if test="musicName != null" >
+        music_name = #{musicName,jdbcType=VARCHAR},
+      </if>
+      <if test="musicSinger != null" >
+        music_singer = #{musicSinger,jdbcType=VARCHAR},
+      </if>
+      <if test="musicAlbum != null" >
+        music_album = #{musicAlbum,jdbcType=VARCHAR},
+      </if>
+      <if test="musicUrlOnline != null" >
+        music_url_online = #{musicUrlOnline,jdbcType=VARCHAR},
+      </if>
+      <if test="musicUrlDownload != null" >
+        music_url_download = #{musicUrlDownload,jdbcType=VARCHAR},
+      </if>
+      <if test="musicCreatetime != null" >
+        music_createtime = #{musicCreatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.music.entity.MusicRecord" >
+    update music_record
+    set music_name = #{musicName,jdbcType=VARCHAR},
+      music_singer = #{musicSinger,jdbcType=VARCHAR},
+      music_album = #{musicAlbum,jdbcType=VARCHAR},
+      music_url_online = #{musicUrlOnline,jdbcType=VARCHAR},
+      music_url_download = #{musicUrlDownload,jdbcType=VARCHAR},
+      music_createtime = #{musicCreatetime,jdbcType=TIMESTAMP}
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>
